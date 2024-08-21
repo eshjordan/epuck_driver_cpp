@@ -592,6 +592,8 @@ public:
         tf2::Quaternion q;
         std::stringstream parent;
         std::stringstream child;
+        std::vector<geometry_msgs::msg::TransformStamped> transforms;
+        transforms.reserve(10);
 
         auto MakeTfMsg = [](const tf2::Transform &transform, const rclcpp::Time &time, auto child, auto parent) {
             geometry_msgs::msg::TransformStamped tf_msg;
@@ -614,80 +616,82 @@ public:
         //   P5(90)                   P2(270)
         //       P4(160)          P3(200)
 
-        child.str("");
-        child << epuckname << "/base_link";
+        parent.str("");
+        parent << epuckname << "/base_link";
 
         transform.setOrigin(tf2::Vector3(0.035, -0.010, 0.034));
         q.setRPY(0, 0, 6.11);
         transform.setRotation(q);
-        parent.str("");
-        parent << epuckname << "/base_prox0";
-        static_br->sendTransform(MakeTfMsg(transform, this->get_clock()->now(), child.str(), parent.str()));
+        child.str("");
+        child << epuckname << "/base_prox0";
+        transforms.push_back(MakeTfMsg(transform, this->get_clock()->now(), child.str(), parent.str()));
 
         transform.setOrigin(tf2::Vector3(0.025, -0.025, 0.034));
         q.setRPY(0, 0, 5.59);
         transform.setRotation(q);
-        parent.str("");
-        parent << epuckname << "/base_prox1";
-        static_br->sendTransform(MakeTfMsg(transform, this->get_clock()->now(), child.str(), parent.str()));
+        child.str("");
+        child << epuckname << "/base_prox1";
+        transforms.push_back(MakeTfMsg(transform, this->get_clock()->now(), child.str(), parent.str()));
 
         transform.setOrigin(tf2::Vector3(0.000, -0.030, 0.034));
         q.setRPY(0, 0, 4.71);
         transform.setRotation(q);
-        parent.str("");
-        parent << epuckname << "/base_prox2";
-        static_br->sendTransform(MakeTfMsg(transform, this->get_clock()->now(), child.str(), parent.str()));
+        child.str("");
+        child << epuckname << "/base_prox2";
+        transforms.push_back(MakeTfMsg(transform, this->get_clock()->now(), child.str(), parent.str()));
 
         transform.setOrigin(tf2::Vector3(-0.035, -0.020, 0.034));
         q.setRPY(0, 0, 3.49);
         transform.setRotation(q);
-        parent.str("");
-        parent << epuckname << "/base_prox3";
-        static_br->sendTransform(MakeTfMsg(transform, this->get_clock()->now(), child.str(), parent.str()));
+        child.str("");
+        child << epuckname << "/base_prox3";
+        transforms.push_back(MakeTfMsg(transform, this->get_clock()->now(), child.str(), parent.str()));
 
         transform.setOrigin(tf2::Vector3(-0.035, 0.020, 0.034));
         q.setRPY(0, 0, 2.8);
         transform.setRotation(q);
-        parent.str("");
-        parent << epuckname << "/base_prox4";
-        static_br->sendTransform(MakeTfMsg(transform, this->get_clock()->now(), child.str(), parent.str()));
+        child.str("");
+        child << epuckname << "/base_prox4";
+        transforms.push_back(MakeTfMsg(transform, this->get_clock()->now(), child.str(), parent.str()));
 
         transform.setOrigin(tf2::Vector3(0.000, 0.030, 0.034));
         q.setRPY(0, 0, 1.57);
         transform.setRotation(q);
-        parent.str("");
-        parent << epuckname << "/base_prox5";
-        static_br->sendTransform(MakeTfMsg(transform, this->get_clock()->now(), child.str(), parent.str()));
+        child.str("");
+        child << epuckname << "/base_prox5";
+        transforms.push_back(MakeTfMsg(transform, this->get_clock()->now(), child.str(), parent.str()));
 
         transform.setOrigin(tf2::Vector3(0.025, 0.025, 0.034));
         q.setRPY(0, 0, 0.70);
         transform.setRotation(q);
-        parent.str("");
-        parent << epuckname << "/base_prox6";
-        static_br->sendTransform(MakeTfMsg(transform, this->get_clock()->now(), child.str(), parent.str()));
+        child.str("");
+        child << epuckname << "/base_prox6";
+        transforms.push_back(MakeTfMsg(transform, this->get_clock()->now(), child.str(), parent.str()));
 
         transform.setOrigin(tf2::Vector3(0.035, 0.010, 0.034));
         q.setRPY(0, 0, 0.17);
         transform.setRotation(q);
-        parent.str("");
-        parent << epuckname << "/base_prox7";
-        static_br->sendTransform(MakeTfMsg(transform, this->get_clock()->now(), child.str(), parent.str()));
+        child.str("");
+        child << epuckname << "/base_prox7";
+        transforms.push_back(MakeTfMsg(transform, this->get_clock()->now(), child.str(), parent.str()));
 
         // Laser
         transform.setOrigin(tf2::Vector3(0.0, 0.0, 0.034));
         q.setRPY(0, 0, 0);
         transform.setRotation(q);
-        parent.str("");
-        parent << epuckname << "/base_laser";
-        static_br->sendTransform(MakeTfMsg(transform, this->get_clock()->now(), child.str(), parent.str()));
+        child.str("");
+        child << epuckname << "/base_laser";
+        transforms.push_back(MakeTfMsg(transform, this->get_clock()->now(), child.str(), parent.str()));
 
         // ToF
         transform.setOrigin(tf2::Vector3(0.035, 0.0, 0.034));
         q.setRPY(0, -0.21, 0.0);
         transform.setRotation(q);
-        parent.str("");
-        parent << epuckname << "/base_dist_sens";
-        static_br->sendTransform(MakeTfMsg(transform, this->get_clock()->now(), child.str(), parent.str()));
+        child.str("");
+        child << epuckname << "/base_dist_sens";
+        transforms.push_back(MakeTfMsg(transform, this->get_clock()->now(), child.str(), parent.str()));
+
+        static_br->sendTransform(transforms);
     }
 
     void updateRosInfo()
@@ -1563,7 +1567,7 @@ public:
             auto x = info.actual_call_time - odomLastPublished;
             if (x < 0.45s) { return; }
 
-            PublishSensorStaticTransforms();
+            // PublishSensorStaticTransforms();
 
             // Publish the initial odom transform over tf.
             geometry_msgs::msg::TransformStamped odomTrans;
@@ -1612,7 +1616,7 @@ int main(int argc, char *argv[])
         node->updateSensorsAndActuators();
         node->updateRosInfo();
         rclcpp::spin_some(node);
-        loop_rate.sleep();
+        // loop_rate.sleep();
     }
 
     node->closeConnection();

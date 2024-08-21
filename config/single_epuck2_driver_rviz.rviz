@@ -3,9 +3,7 @@ Panels:
     Help Height: 78
     Name: Displays
     Property Tree Widget:
-      Expanded:
-        - /MagneticField1
-        - /MagneticField1/Status1
+      Expanded: ~
       Splitter Ratio: 0.6391180157661438
     Tree Height: 468
   - Class: rviz_common/Selection
@@ -23,7 +21,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: ""
+    SyncSource: LaserScan
 Visualization Manager:
   Class: ""
   Displays:
@@ -52,11 +50,11 @@ Visualization Manager:
       Enabled: true
       Name: Prox0
       Topic:
-        Depth: 100
+        Depth: 10
         Durability Policy: Volatile
-        Filter size: 10
+        Filter size: 1
         History Policy: Keep Last
-        Reliability Policy: Reliable
+        Reliability Policy: Best Effort
         Value: /proximity0
       Value: true
     - Alpha: 0.5
@@ -66,11 +64,11 @@ Visualization Manager:
       Enabled: true
       Name: Prox1
       Topic:
-        Depth: 100
+        Depth: 10
         Durability Policy: Volatile
-        Filter size: 10
+        Filter size: 1
         History Policy: Keep Last
-        Reliability Policy: Reliable
+        Reliability Policy: Best Effort
         Value: /proximity1
       Value: true
     - Alpha: 0.5
@@ -80,11 +78,11 @@ Visualization Manager:
       Enabled: true
       Name: Prox2
       Topic:
-        Depth: 100
+        Depth: 10
         Durability Policy: Volatile
-        Filter size: 10
+        Filter size: 1
         History Policy: Keep Last
-        Reliability Policy: Reliable
+        Reliability Policy: Best Effort
         Value: /proximity2
       Value: true
     - Alpha: 0.5
@@ -94,11 +92,11 @@ Visualization Manager:
       Enabled: true
       Name: Prox3
       Topic:
-        Depth: 100
+        Depth: 10
         Durability Policy: Volatile
-        Filter size: 10
+        Filter size: 1
         History Policy: Keep Last
-        Reliability Policy: Reliable
+        Reliability Policy: Best Effort
         Value: /proximity3
       Value: true
     - Alpha: 0.5
@@ -108,11 +106,11 @@ Visualization Manager:
       Enabled: true
       Name: Prox4
       Topic:
-        Depth: 100
+        Depth: 10
         Durability Policy: Volatile
-        Filter size: 10
+        Filter size: 1
         History Policy: Keep Last
-        Reliability Policy: Reliable
+        Reliability Policy: Best Effort
         Value: /proximity4
       Value: true
     - Alpha: 0.5
@@ -122,11 +120,11 @@ Visualization Manager:
       Enabled: true
       Name: Prox5
       Topic:
-        Depth: 100
+        Depth: 10
         Durability Policy: Volatile
-        Filter size: 10
+        Filter size: 1
         History Policy: Keep Last
-        Reliability Policy: Reliable
+        Reliability Policy: Best Effort
         Value: /proximity5
       Value: true
     - Alpha: 0.5
@@ -136,11 +134,11 @@ Visualization Manager:
       Enabled: true
       Name: Prox6
       Topic:
-        Depth: 100
+        Depth: 10
         Durability Policy: Volatile
-        Filter size: 10
+        Filter size: 1
         History Policy: Keep Last
-        Reliability Policy: Reliable
+        Reliability Policy: Best Effort
         Value: /proximity6
       Value: true
     - Alpha: 0.5
@@ -150,11 +148,11 @@ Visualization Manager:
       Enabled: true
       Name: Prox7
       Topic:
-        Depth: 100
+        Depth: 10
         Durability Policy: Volatile
-        Filter size: 10
+        Filter size: 1
         History Policy: Keep Last
-        Reliability Policy: Reliable
+        Reliability Policy: Best Effort
         Value: /proximity7
       Value: true
     - Class: rviz_default_plugins/TF
@@ -362,11 +360,11 @@ Visualization Manager:
       Enabled: true
       Name: DistanceSensor
       Topic:
-        Depth: 100
+        Depth: 10
         Durability Policy: Volatile
-        Filter size: 10
+        Filter size: 1
         History Policy: Keep Last
-        Reliability Policy: Reliable
+        Reliability Policy: Best Effort
         Value: /dist_sens
       Value: true
     - Class: rviz_default_plugins/Marker
@@ -428,7 +426,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/XYOrbit
-      Distance: 0.6006462574005127
+      Distance: 0.8561939597129822
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -443,10 +441,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.11539869010448456
+      Pitch: 0.3403986096382141
       Target Frame: base_link
       Value: XYOrbit (rviz_default_plugins)
-      Yaw: 2.390404224395752
+      Yaw: 0.8103981614112854
     Saved: ~
 Window Geometry:
   Displays:
@@ -467,4 +465,4 @@ Window Geometry:
     collapsed: false
   Width: 1535
   X: 226
-  Y: 195
+  Y: 204

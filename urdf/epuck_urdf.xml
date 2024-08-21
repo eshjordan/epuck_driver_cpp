@@ -7,7 +7,7 @@
       </geometry>
       <origin xyz="0.0 0.0 0.02" />
       <material name="light_grey">
-        <color rgba="0.8 0.8 0.8 1" />
+        <color rgba="0.8 0.8 0.8 0.5" />
       </material>
     </visual>
   </link>
