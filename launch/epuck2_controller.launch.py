@@ -87,6 +87,7 @@ def generate_launch_description():
                 condition=IfCondition(
                     launch.substitutions.LaunchConfiguration("sim_en")
                 ),
+                output="screen",
                 cmd=[
                     "python3",
                     [

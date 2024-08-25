@@ -204,7 +204,7 @@ class EpuckModel:
 
     def get_steps(self, dt):
         wl_steps = self.wl_pos + round(self.wl_vel * dt)
-        wr_steps = self.wl_pos + round(self.wr_vel * dt)
+        wr_steps = self.wr_pos + round(self.wr_vel * dt)
 
         # Steps are between -32768-32767
         if wl_steps > 32767:
