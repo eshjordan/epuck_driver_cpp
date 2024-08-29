@@ -11,12 +11,14 @@ from dataclasses import dataclass
 
 ENDIAN_FMT = "<"
 
+EPUCK_SENSOR_PACKET_FMT_STR: str = (
+    ENDIAN_FMT + "BhhhfffhhhfffBHHHHHHHHHHHHHHHHHHHHHhhHBBBBBHHHHHHBB"
+)
+EPUCK_SENSOR_PACKET_ID: int = 0x2
+
 
 @dataclass
 class EpuckSensorPacket:
-    FMT_STR: str = ENDIAN_FMT + "BhhhfffhhhfffBHHHHHHHHHHHHHHHHHHHHHhhHBBBBBHHHHHHBB"
-    ID: int = 0x2
-
     id: int = 0x2  # byte
     imu_acc_x: int = 0  # short
     imu_acc_y: int = 0  # short
@@ -71,7 +73,7 @@ class EpuckSensorPacket:
 
     def pack(self):
         return struct.pack(
-            EpuckSensorPacket.FMT_STR,
+            EPUCK_SENSOR_PACKET_FMT_STR,
             self.id,
             self.imu_acc_x,
             self.imu_acc_y,
@@ -127,26 +129,24 @@ class EpuckSensorPacket:
 
     @classmethod
     def unpack(cls, buffer: bytes):
-        if buffer[0] != EpuckSensorPacket.ID:
+        if buffer[0] != EPUCK_SENSOR_PACKET_ID:
             raise ValueError(
-                f"Invalid message id: {buffer[0]}, expected {EpuckSensorPacket.ID}"
+                f"Invalid message id: {buffer[0]}, expected {EPUCK_SENSOR_PACKET_ID}"
             )
-        args = struct.unpack(
-            EpuckSensorPacket.FMT_STR,
-            buffer,
-        )
+        args = struct.unpack(EPUCK_SENSOR_PACKET_FMT_STR, buffer)
         return cls(*args)
 
     @classmethod
     def calcsize(cls):
-        return struct.calcsize(EpuckSensorPacket.FMT_STR)
+        return struct.calcsize(EPUCK_SENSOR_PACKET_FMT_STR)
+
+
+EPUCK_COMMAND_PACKET_FMT_STR: str = ENDIAN_FMT + "BBBhhBBBBBBBBBBBBBB"
+EPUCK_COMMAND_PACKET_ID: int = 0x80
 
 
 @dataclass
 class EpuckCommandPacket:
-    FMT_STR: str = ENDIAN_FMT + "BBBhhBBBBBBBBBBBBBB"
-    ID: int = 0x80
-
     command: int = 0x80  # byte
     request_flags: int = 0  # byte
     settings_flags: int = 0  # byte
@@ -193,17 +193,17 @@ class EpuckCommandPacket:
 
     @classmethod
     def unpack(cls, buffer: bytes):
-        if buffer[0] != EpuckCommandPacket.ID:
+        if buffer[0] != EPUCK_COMMAND_PACKET_ID:
             raise ValueError(
-                f"Invalid message id: {buffer[0]}, expected {EpuckCommandPacket.ID}"
+                f"Invalid message id: {buffer[0]}, expected {EPUCK_COMMAND_PACKET_ID}"
             )
-        args = struct.unpack(EpuckCommandPacket.FMT_STR, buffer)
+        args = struct.unpack(EPUCK_COMMAND_PACKET_FMT_STR, buffer)
         # 0001 1001
         return cls(*args)
 
     @classmethod
     def calcsize(cls):
-        return struct.calcsize(EpuckCommandPacket.FMT_STR)
+        return struct.calcsize(EPUCK_COMMAND_PACKET_FMT_STR)
 
 
 sock: socket.socket = None
