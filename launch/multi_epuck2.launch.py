@@ -28,17 +28,13 @@ def generate_launch_description():
                 "robot_port1": "1000",
                 "robot_port2": "1000",
                 "robot_port3": "1000",
-                "sim_en": "false",
+                "robot_sim_en0": "false",
+                "robot_sim_en1": "false",
+                "robot_sim_en2": "false",
+                "robot_sim_en3": "false",
             }.items(),
         )
     )
-
-    robot_ids = [
-        LaunchConfiguration("robot_id0"),
-        LaunchConfiguration("robot_id1"),
-        LaunchConfiguration("robot_id2"),
-        LaunchConfiguration("robot_id3"),
-    ]
 
     robot_poses = [
         ("-0.1", "-0.1", "0.0"),
@@ -64,7 +60,7 @@ def generate_launch_description():
                     PythonExpression(
                         [
                             f"{i} == 0 or (",
-                            robot_ids[i],
+                            launch.substitutions.LaunchConfiguration(f"robot_id{i}"),
                             " != 0)",
                         ]
                     )
@@ -87,7 +83,9 @@ def generate_launch_description():
                     "ypos": robot_poses[i][1],
                     "theta": robot_poses[i][2],
                     "is_single_robot": "false",
-                    "sim_en": launch.substitutions.LaunchConfiguration("sim_en"),
+                    "sim_en": launch.substitutions.LaunchConfiguration(
+                        f"robot_sim_en{i}"
+                    ),
                 }.items(),
             )
         )
