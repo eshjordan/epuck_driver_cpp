@@ -40,21 +40,6 @@ def generate_launch_description():
                 executable="rviz2",
                 name="rviz2",
                 output="screen",
-                parameters=[
-                    {
-                        "robot_description": FileContent(
-                            [
-                                PathJoinSubstitution(
-                                    [
-                                        FindPackageShare("epuck_driver_cpp"),
-                                        "urdf",
-                                        "epuck_urdf.xml",
-                                    ]
-                                )
-                            ]
-                        )
-                    }
-                ],
                 arguments=[
                     "-d",
                     PathJoinSubstitution(
@@ -150,13 +135,18 @@ def generate_launch_description():
                 namespace=launch.substitutions.LaunchConfiguration("namespace"),
                 package="robot_state_publisher",
                 executable="robot_state_publisher",
-                name="epuck_state_publisher",
+                name=(
+                    "epuck_state_publisher_",
+                    launch.substitutions.LaunchConfiguration("epuck2_id"),
+                ),
                 parameters=[
+                    {"use_sim_time": True},
                     {
                         "frame_prefix": [
                             launch.substitutions.LaunchConfiguration("epuck2_name"),
                             "/",
                         ],
+                        "publish_frequency": 60.0,
                         "robot_description": FileContent(
                             [
                                 PathJoinSubstitution(
@@ -168,7 +158,25 @@ def generate_launch_description():
                                 ),
                             ]
                         ),
-                    }
+                    },
+                ],
+            ),
+            launch_ros.actions.Node(
+                namespace=launch.substitutions.LaunchConfiguration("namespace"),
+                package="joint_state_publisher",
+                executable="joint_state_publisher",
+                name=(
+                    "epuck_joint_publisher_",
+                    launch.substitutions.LaunchConfiguration("epuck2_id"),
+                ),
+                arguments=[
+                    PathJoinSubstitution(
+                        [
+                            FindPackageShare("epuck_driver_cpp"),
+                            "urdf",
+                            "epuck_urdf.xml",
+                        ]
+                    ),
                 ],
             ),
             # launch_ros.actions.Node(
