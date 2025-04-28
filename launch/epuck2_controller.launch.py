@@ -18,7 +18,7 @@ def generate_launch_description():
                 "epuck2_address": "192.168.1.1",
                 "epuck2_port": "1000",
                 "epuck2_name": "epuck2_robot_0",
-                "is_single_robot": "true",
+                "rviz": "true",
                 "xpos": "0.0",
                 "ypos": "0.0",
                 "theta": "0.0",
@@ -34,7 +34,7 @@ def generate_launch_description():
         + [
             launch_ros.actions.Node(
                 condition=IfCondition(
-                    launch.substitutions.LaunchConfiguration("is_single_robot")
+                    launch.substitutions.LaunchConfiguration("rviz")
                 ),
                 package="rviz2",
                 executable="rviz2",
@@ -49,21 +49,6 @@ def generate_launch_description():
                             "single_epuck2_driver_rviz.rviz",
                         ]
                     ),
-                ],
-            ),
-            launch_ros.actions.Node(
-                condition=IfCondition(
-                    launch.substitutions.LaunchConfiguration("is_single_robot")
-                ),
-                package="tf2_ros",
-                executable="static_transform_publisher",
-                name="static_transform_publisher",
-                output="screen",
-                arguments=[
-                    "--frame-id",
-                    "world",
-                    "--child-frame-id",
-                    "odom",
                 ],
             ),
             # Optionally launch a simple server to simulate the connection to the e-puck2 robot

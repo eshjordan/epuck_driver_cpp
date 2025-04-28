@@ -32,6 +32,7 @@ def generate_launch_description():
                 "robot_sim_en1": "false",
                 "robot_sim_en2": "false",
                 "robot_sim_en3": "false",
+                "rviz": "true",
             }.items(),
         )
     )
@@ -60,7 +61,8 @@ def generate_launch_description():
                     PythonExpression(
                         [
                             f"{i} == 0 or (",
-                            launch.substitutions.LaunchConfiguration(f"robot_id{i}"),
+                            launch.substitutions.LaunchConfiguration(
+                                f"robot_id{i}"),
                             " != 0)",
                         ]
                     )
@@ -82,7 +84,7 @@ def generate_launch_description():
                     "xpos": robot_poses[i][0],
                     "ypos": robot_poses[i][1],
                     "theta": robot_poses[i][2],
-                    "is_single_robot": "false",
+                    "rviz": "false",
                     "sim_en": launch.substitutions.LaunchConfiguration(
                         f"robot_sim_en{i}"
                     ),
@@ -99,6 +101,9 @@ def generate_launch_description():
                 executable="rviz2",
                 name="rviz2",
                 output="screen",
+                condition=launch.conditions.IfCondition(
+                    launch.substitutions.LaunchConfiguration("rviz")
+                ),
                 arguments=[
                     "-d",
                     PathJoinSubstitution(
@@ -108,18 +113,6 @@ def generate_launch_description():
                             "multi_epuck2_driver_rviz.rviz",
                         ]
                     ),
-                ],
-            ),
-            launch_ros.actions.Node(
-                package="tf2_ros",
-                executable="static_transform_publisher",
-                name="static_transform_publisher",
-                output="screen",
-                arguments=[
-                    "--frame-id",
-                    "world",
-                    "--child-frame-id",
-                    "odom",
                 ],
             ),
         ]

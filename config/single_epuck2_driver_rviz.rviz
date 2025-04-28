@@ -55,7 +55,7 @@ Visualization Manager:
         Filter size: 1
         History Policy: Keep Last
         Reliability Policy: Best Effort
-        Value: /proximity0
+        Value: /epuck2_robot_0/proximity0
       Value: true
     - Alpha: 0.5
       Buffer Length: 1
@@ -69,7 +69,7 @@ Visualization Manager:
         Filter size: 1
         History Policy: Keep Last
         Reliability Policy: Best Effort
-        Value: /proximity1
+        Value: /epuck2_robot_0/proximity1
       Value: true
     - Alpha: 0.5
       Buffer Length: 1
@@ -83,7 +83,7 @@ Visualization Manager:
         Filter size: 1
         History Policy: Keep Last
         Reliability Policy: Best Effort
-        Value: /proximity2
+        Value: /epuck2_robot_0/proximity2
       Value: true
     - Alpha: 0.5
       Buffer Length: 1
@@ -97,7 +97,7 @@ Visualization Manager:
         Filter size: 1
         History Policy: Keep Last
         Reliability Policy: Best Effort
-        Value: /proximity3
+        Value: /epuck2_robot_0/proximity3
       Value: true
     - Alpha: 0.5
       Buffer Length: 1
@@ -111,7 +111,7 @@ Visualization Manager:
         Filter size: 1
         History Policy: Keep Last
         Reliability Policy: Best Effort
-        Value: /proximity4
+        Value: /epuck2_robot_0/proximity4
       Value: true
     - Alpha: 0.5
       Buffer Length: 1
@@ -125,7 +125,7 @@ Visualization Manager:
         Filter size: 1
         History Policy: Keep Last
         Reliability Policy: Best Effort
-        Value: /proximity5
+        Value: /epuck2_robot_0/proximity5
       Value: true
     - Alpha: 0.5
       Buffer Length: 1
@@ -139,7 +139,7 @@ Visualization Manager:
         Filter size: 1
         History Policy: Keep Last
         Reliability Policy: Best Effort
-        Value: /proximity6
+        Value: /epuck2_robot_0/proximity6
       Value: true
     - Alpha: 0.5
       Buffer Length: 1
@@ -153,7 +153,7 @@ Visualization Manager:
         Filter size: 1
         History Policy: Keep Last
         Reliability Policy: Best Effort
-        Value: /proximity7
+        Value: /epuck2_robot_0/proximity7
       Value: true
     - Class: rviz_default_plugins/TF
       Enabled: false
@@ -181,7 +181,7 @@ Visualization Manager:
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /robot_description
+        Value: /epuck2_robot_0/robot_description
       Enabled: true
       Links:
         All Links Enabled: true
@@ -254,7 +254,7 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /odom
+        Value: /epuck2_robot_0/odom
       Value: true
     - Class: rviz_default_plugins/Marker
       Enabled: true
@@ -267,7 +267,7 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Best Effort
-        Value: /floor
+        Value: /epuck2_robot_0/floor
       Value: true
     - Class: rviz_default_plugins/Marker
       Enabled: true
@@ -280,7 +280,7 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Best Effort
-        Value: /microphone
+        Value: /epuck2_robot_0/microphone
       Value: true
     - Class: rviz_default_plugins/Image
       Enabled: true
@@ -294,7 +294,7 @@ Visualization Manager:
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /camera
+        Value: /epuck2_robot_0/camera
       Value: true
     - Alpha: 1
       Autocompute Intensity Bounds: true
@@ -326,7 +326,7 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /scan
+        Value: /epuck2_robot_0/scan
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
@@ -344,13 +344,13 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /map
+        Value: /epuck2_robot_0/map
       Update Topic:
         Depth: 5
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /map_updates
+        Value: /epuck2_robot_0/map_updates
       Use Timestamp: false
       Value: true
     - Alpha: 0.5
@@ -365,7 +365,7 @@ Visualization Manager:
         Filter size: 1
         History Policy: Keep Last
         Reliability Policy: Best Effort
-        Value: /dist_sens
+        Value: /epuck2_robot_0/dist_sens
       Value: true
     - Class: rviz_default_plugins/Marker
       Enabled: false
@@ -378,12 +378,12 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Best Effort
-        Value: /mag_field_vector
+        Value: /epuck2_robot_0/mag_field_vector
       Value: false
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: odom
+    Fixed Frame: earth
     Frame Rate: 30
   Name: root
   Tools:
@@ -442,7 +442,7 @@ Visualization Manager:
       Name: Current View
       Near Clip Distance: 0.009999999776482582
       Pitch: 0.3403986096382141
-      Target Frame: base_link
+      Target Frame: earth
       Value: XYOrbit (rviz_default_plugins)
       Yaw: 0.8103981614112854
     Saved: ~

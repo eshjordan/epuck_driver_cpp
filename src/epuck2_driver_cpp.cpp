@@ -1068,8 +1068,11 @@ public:
         rightStepsPrev = motorPositionDataCorrect[1] * MOT_STEP_DIST; // Expressed in meters.
 
         // Publish the odometry message over ROS.
-        odomMsg.header.stamp    = this->get_clock()->now();
-        odomMsg.header.frame_id = "odom";
+        odomMsg.header.stamp = this->get_clock()->now();
+        ss.str("");
+        ss << epuckname << "/odom";
+        odomMsg.header.frame_id = ss.str();
+        ss.str("");
         ss << epuckname << "/base_link";
         odomMsg.child_frame_id       = ss.str();
         odomMsg.pose.pose.position.x = xPos;
@@ -1571,10 +1574,12 @@ public:
 
             // Publish the initial odom transform over tf.
             geometry_msgs::msg::TransformStamped odomTrans;
+            odomTrans.header.stamp = this->get_clock()->now();
+            ss.str("");
+            ss << epuckname << "/odom";
+            odomTrans.header.frame_id = ss.str();
             ss.str("");
             ss << epuckname << "/base_link";
-            odomTrans.header.stamp            = this->get_clock()->now();
-            odomTrans.header.frame_id         = "odom";
             odomTrans.child_frame_id          = ss.str();
             odomTrans.transform.translation.x = xPos;
             odomTrans.transform.translation.y = yPos;
